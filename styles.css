@@ -147,6 +147,11 @@ blockquote p {
     margin: 0;
 }
 
+/* makes separators more consistent */
+hr {
+    border-color: var(--separator-color);
+}
+
 /**
  - makes dt bold
  - uses relative bold for bold text, see modern-normalize.css
