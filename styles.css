@@ -80,20 +80,6 @@ body > header > p {
     margin: 1rem auto;
 }
 
-
-/* Links */
-a[href] {
-    color: var(--accent1);
-    text-decoration: none;
-    transition: all .3s ease-out;
-    text-underline-position: under;
-}
-
-a[href]:hover {
-    color: var(--accent2);
-    text-decoration: underline;
-}
-
 /* stolen from simple.css */
 p, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
@@ -172,7 +158,8 @@ dd {
 table {
     width: 100%;
     border-spacing: 0;
-    text-align: left;
+    text-align: justify;
+    border-collapse: collapse;
 }
 
 table caption {
@@ -189,8 +176,8 @@ tbody td {
     border-bottom: .1rem solid var(--separator2);
 }
 
-tbody tr:last-child td {
-    border-bottom: .135rem solid var(--separator-color);
+tfoot th {
+    border-top: .135rem solid var(--separator-color);
 }
 
 td, th {
@@ -233,6 +220,44 @@ pre {
     border-radius: .4rem;
     padding: 1rem;
     overflow-x: auto;
+}
+
+/* move underline lower */
+a[href], u, ins, abbr {
+    text-underline-position: under;
+}
+
+/* Links */
+a[href] {
+    color: var(--accent1);
+    text-decoration: none;
+    transition: color .3s ease-out, text-decoration .3s ease-out;
+}
+
+a[href]:hover {
+    color: var(--accent2);
+    text-decoration: underline wavy var(--accent2);
+    /*border-bottom: .1rem solid var(--accent2);*/
+}
+
+abbr[title] {
+    cursor: help;
+}
+
+q {
+    font-style: italic;
+}
+
+mark, var, time{
+    border-radius: .4rem;
+    padding: .2rem .5rem .3rem;
+    background-color: var(--base-color-light);
+    /*color: var(--accent1);*/
+}
+
+mark {
+    background-color: var(--accent1);
+    color: var(--on-accent);
 }
 
 /* stolen from modern-normalize.css */
