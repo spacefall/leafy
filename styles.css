@@ -1,0 +1,190 @@
+/* colors */
+:root {
+    --base-color: #333;
+    --base-color-light: #555;
+    --base-color-dark: #222;
+    --separator-color: #ccc;
+    --text: #EEE;
+    --text2: #AAA;
+    --accent1: #ffb000;
+    --accent2: #fe6100;
+}
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+html {
+    /* modern-normalize.css */
+    font-family:
+            system-ui,
+            'Segoe UI',
+            Roboto,
+            Helvetica,
+            Arial,
+            sans-serif,
+            'Apple Color Emoji',
+            'Segoe UI Emoji';
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+
+    /* nicer scrolling */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-size: 1.15rem;
+    line-height: 1.8rem;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 80% 1fr;
+    background-color: var(--base-color-dark);
+}
+
+body > * {
+    grid-column: 2;
+    color: var(--text);
+}
+
+body > header {
+    background-color: var(--base-color);
+    color: var(--text);
+
+    /* allignment */
+    grid-column: -1 / 1;
+    padding: 3rem;
+
+    text-align: center;
+    border-bottom: var(--separator-color) 1px solid;
+}
+
+body > header > h1 {
+    background: linear-gradient(to left, var(--accent1), var(--accent2));
+    background-clip: text;
+    /*color: rgba(0, 0, 0, 50%);*/
+    color: transparent;
+
+    width: max-content;
+    margin: auto;
+    /*padding: max-content;*/
+    padding: 0.5rem;
+    filter: drop-shadow(var(--base-color-dark) 0 0 .3rem);
+}
+
+body > header > p {
+    margin: 1rem auto;
+}
+
+
+/* Links */
+a[href] {
+    color: var(--accent1);
+    text-decoration: none;
+    transition: all .3s ease-out;
+    text-underline-position: under;
+}
+
+a[href]:hover {
+    color: var(--accent2);
+    text-decoration: underline;
+}
+
+/* stolen from simple.css */
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+}
+
+/* Format headers */
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2.6rem;
+    margin-top: 3rem;
+}
+
+h3 {
+    font-size: 2rem;
+    margin-top: 3rem;
+}
+
+h4 {
+    font-size: 1.44rem;
+}
+
+h5 {
+    font-size: 1.15rem;
+}
+
+h6 {
+    font-size: 0.96rem;
+}
+
+p {
+    margin: 1.5rem 0;
+}
+
+/* Fix line height when title wraps */
+h1,
+h2,
+h3 {
+    line-height: 1.1;
+}
+
+/* stolen from modern-normalize.css */
+b,
+strong {
+    font-weight: bolder;
+}
+
+/**
+1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
+2. Correct the odd 'em' font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+    font-family:
+            ui-monospace,
+            SFMono-Regular,
+            Consolas,
+            'Liberation Mono',
+            Menlo,
+            monospace; /* 1 */
+    font-size: 1em; /* 2 */
+}
+
+/**
+Add the correct font size in all browsers.
+*/
+
+small {
+    font-size: 80%;
+    color: var(--text2);
+}
+
+/**
+Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
