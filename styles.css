@@ -496,6 +496,11 @@ input[type="file"]::file-selector-button {
     margin: 0 .3rem;
 }
 
+*[dir="rtl"] input[type="file"]::file-selector-button {
+    left: 0;
+    right: unset;
+}
+
 :focus {
     outline: .135rem solid var(--accent1);
     outline-offset: .135rem;
