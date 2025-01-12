@@ -142,7 +142,7 @@ hr {
 
 /**
  - makes dt bold
- - uses relative bold for bold text, see modern-normalize.css
+ - uses relative bold for bold text, from modern-normalize.css
 */
 b, strong, dt {
     font-weight: bolder;
@@ -187,7 +187,8 @@ tr:nth-child(even), thead tr, tfoot tr {
     background-color: var(--base-color-light);
 }
 
-/* kbd */
+/* kbd, i think this is so cool, if you hover over it it moves down like a key :) */
+/* i get impressed easily */
 kbd {
     background-color: var(--accent1);
     border: .1rem solid var(--accent2);
@@ -205,27 +206,6 @@ kbd:hover {
     top: .3rem;
 }
 
-/* code */
-code, samp {
-    background-color: var(--base-color-light);
-    /*border: .1rem solid var(--separator2);*/
-    border-radius: .4rem;
-    padding: .3rem;
-}
-
-/* pre */
-pre {
-    background-color: var(--base-color-light);
-    border-radius: .4rem;
-    padding: 1rem;
-    overflow-x: auto;
-}
-
-/* move underline lower */
-a[href], u, ins, abbr {
-    text-underline-position: under;
-}
-
 /* Links */
 a[href] {
     color: var(--accent1);
@@ -237,6 +217,26 @@ a[href]:hover {
     color: var(--accent2);
     text-decoration: underline wavy var(--accent2);
     /*border-bottom: .1rem solid var(--accent2);*/
+}
+
+/* inline formatting ig */
+code, samp {
+    background-color: var(--base-color-light);
+    /*border: .1rem solid var(--separator2);*/
+    border-radius: .4rem;
+    padding: .3rem;
+}
+
+pre {
+    background-color: var(--base-color-light);
+    border-radius: .4rem;
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+/* move underline lower */
+a[href], u, ins, abbr {
+    text-underline-position: under;
 }
 
 abbr[title] {
@@ -251,7 +251,6 @@ mark, var, time {
     border-radius: .4rem;
     padding: .2rem .5rem .3rem;
     background-color: var(--base-color-light);
-    /*color: var(--accent1);*/
 }
 
 mark {
@@ -259,6 +258,7 @@ mark {
     color: var(--on-accent);
 }
 
+/* form elements */
 fieldset {
     border: .1rem solid var(--separator-color);
     border-radius: .4rem;
@@ -272,8 +272,6 @@ label {
 
 textarea, input, select {
     appearance: none;
-    /*height: 2rem;*/
-    /*border: .1rem solid var(--separator-color);*/
     border: 0;
     border-radius: .4rem;
     padding: .4rem .6rem;
@@ -282,14 +280,22 @@ textarea, input, select {
     font: inherit;
 }
 
+/* select elem customization */
+
+/* hide scrollbar */
 select[multiple] {
     overflow-y: auto;
 }
 
+/* changes background color for selected option */
+option:checked {
+    background-color: var(--accent1);
+    color: var(--on-accent);
+}
+
 /**
- these rules add small elements to the inputs, for example a dropdown arrow or the the tick to the checkbox
- they have been shamelessly stolen from simple.css, links for snippets follow:
- - https://github.com/kevquirk/simple.css/blob/be882ce561b0fe5ced621cc64595c812790b2524/simple.css#L457-L467
+ this adds a small arrow to the single selection element thing, and it has been stolen from simple.css
+ https://github.com/kevquirk/simple.css/blob/be882ce561b0fe5ced621cc64595c812790b2524/simple.css#L457-L467
 */
 select:not([multiple]) {
     background-image: linear-gradient(45deg, transparent 49%, var(--text) 51%),
@@ -303,12 +309,14 @@ select:not([multiple]) {
     background-position: 10px, 15px;
 }
 
-option:checked {
-    background-color: var(--accent1);
-    color: var(--on-accent);
-}
-
-/* checkbox */
+/**
+custom checkbox
+this was a pain
+- works like a checkbox
+- uses the accent color
+- animated hover effect
+- i should've probably left the default checkbox
+*/
 input[type="checkbox"] {
     background-color: var(--base-color-dark);
     margin: 0;
@@ -321,7 +329,7 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-input[type="checkbox"]::before {
+input[type="checkbox"]:checked::before {
     content: "";
     position: absolute;
     top: 15%;
@@ -330,31 +338,17 @@ input[type="checkbox"]::before {
     height: .75rem;
     border-right: solid var(--base-color-dark) 0.25rem;
     border-bottom: solid var(--base-color-dark) 0.25rem;
-    /*box-shadow: inset 1em 1em #000;*/
-    transform: scale(0);
+    transform: rotate(40deg);
 }
 
-input[type="checkbox"]:checked, input[type="radio"]:checked  {
-    background-color: var(--accent1);
-}
-
-input[type="checkbox"]:checked::before {
-    transform: rotate(40deg) scale(1);
-}
-
-input[type="checkbox"]:hover:not(:disabled), input[type="radio"]:hover:not(:disabled) {
-    background-color: var(--accent2);
-}
-
-input[type="checkbox"]:disabled, input[type="radio"]:disabled {
-    cursor: not-allowed;
-}
-
-input[type="checkbox"]:checked:disabled, input[type="radio"]:checked:disabled {
-    background-color: var(--base-color-light);
-}
-
-/* radio */
+/**
+custom radio button
+this was a pain like the checkbox
+- works like a radio button
+- uses the accent color
+- animated hover effect
+- i should've probably left the default radio button
+*/
 input[type="radio"] {
     background-color: var(--base-color-dark);
     margin: 0;
@@ -368,7 +362,7 @@ input[type="radio"] {
     cursor: pointer;
 }
 
-input[type="radio"]::before {
+input[type="radio"]:checked::before {
     content: " ";
     position: absolute;
     top: 50%;
@@ -377,22 +371,37 @@ input[type="radio"]::before {
     height: .6em;
     background-color: var(--base-color-dark);
     border-radius: 100%;
-    /*box-shadow: inset 1em 1em #000;*/
-    transform: scale(0);
+    transform: translate(-50%, -50%);
 }
 
-input[type="radio"]:checked::before {
-    transform: scale(1) translate(-50%, -50%);
+/**
+misc rules for checkboxes and radios
+- hover background color
+- disabled background color
+- checked background color
+ */
+input[type="checkbox"]:checked, input[type="radio"]:checked  {
+    background-color: var(--accent1);
 }
 
-/* color */
+input[type="checkbox"]:hover:not(:disabled), input[type="radio"]:hover:not(:disabled) {
+    background-color: var(--accent2);
+}
+
+input[type="checkbox"]:disabled, input[type="radio"]:disabled {
+    background-color: var(--base-color-light);
+    cursor: not-allowed;
+}
+
+/* makes color picker bigger */
 input[type="color"] {
     height: 2.5rem;
 }
 
-/* range */
-
-/*********** Baseline, reset styles ***********/
+/**
+range, most of the css here was from https://range-input-css.netlify.app/
+the style change the thumb color to the accent color, the track gets the dark color and is also thinner (and rounded)
+*/
 input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
@@ -406,7 +415,7 @@ input[type="range"]:focus {
     outline: none;
 }
 
-/******** Chrome, Safari, Opera and Edge Chromium styles ********/
+/* webkit */
 /* slider track */
 input[type="range"]::-webkit-slider-runnable-track {
     background-color: var(--base-color-dark);
@@ -430,7 +439,7 @@ input[type="range"]:focus::-webkit-slider-thumb {
     outline-offset: .135rem;
 }
 
-/*********** Firefox styles ***********/
+/* firefox */
 /* slider track */
 input[type="range"]::-moz-range-track {
     background-color: var(--base-color-dark);
@@ -452,11 +461,18 @@ input[type="range"]:focus::-moz-range-thumb{
     outline-offset: .135rem;
 }
 
+/**
+button styling
+- use accent colors
+- add hover effect (animated)
+- change pointer
+- rules for disabled buttons
+*/
 button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
-input[type="file"]::file-selector-button{
+input[type="file"]::file-selector-button {
     appearance: none;
     font: inherit;
     background-color: var(--accent1);
@@ -486,6 +502,12 @@ input[type="file"]:not(:disabled)::file-selector-button:hover {
     background-color: var(--accent2);
 }
 
+/**
+file input button customization:
+- moves the button to the right
+- does some styling (same as buttons with some extra rules to center it)
+- moves the focus to the button instead
+*/
 input[type="file"] {
     padding: .7rem .6rem;
     position: relative;
@@ -509,11 +531,13 @@ input[type="file"]:focus::file-selector-button {
     outline-offset: .135rem;
 }
 
+/* rtl support for file picker */
 *[dir="rtl"] input[type="file"]::file-selector-button {
     left: 0;
     right: unset;
 }
 
+/* focus rules, so they are consistent and also are more in line with the theme */
 :focus {
     outline: .135rem solid var(--accent1);
     outline-offset: .135rem;
@@ -531,7 +555,7 @@ meter::-webkit-meter-optimum-value {
     border-radius: .4rem;
 }
 
-/* stolen from modern-normalize.css */
+/* snippet stolen from modern-normalize.css */
 
 /**
 1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
