@@ -4,6 +4,7 @@
     --base-color-light: #555;
     --base-color-dark: #222;
     --separator-color: #ccc;
+    --separator2: #aaa;
     --text: #EEE;
     --text2: #AAA;
     /* accent colors from ibm style guide (should be colorblind friendly)*/
@@ -41,7 +42,7 @@ body {
     margin: 0;
     display: grid;
     grid-template-columns: 1fr 80% 1fr;
-    background-color: var(--base-color-dark);
+    background-color: var(--base-color);
 }
 
 body > * {
@@ -50,7 +51,7 @@ body > * {
 }
 
 body > header {
-    background-color: var(--base-color);
+    background-color: var(--base-color-light);
     color: var(--text);
 
     /* allignment */
@@ -139,7 +140,7 @@ h3 {
 blockquote {
     margin: 1rem;
     padding: 1rem;
-    background-color: var(--base-color);
+    background-color: var(--base-color-light);
     border-left: 0.3rem solid var(--accent1);
 }
 
@@ -149,7 +150,8 @@ blockquote p {
 
 /* makes separators more consistent */
 hr {
-    border-color: var(--separator-color);
+    border: 0;
+    border-bottom: .135rem solid var(--separator-color);
 }
 
 /**
@@ -163,6 +165,39 @@ b, strong, dt {
 /* shorter distance from side for dd */
 dd {
     margin-left: 1.5rem;
+}
+
+/* tables */
+table {
+    width: 100%;
+    border-spacing: 0;
+    text-align: left;
+}
+
+table caption {
+    font-weight: bolder;
+    font-size: 1.44rem;
+    margin-bottom: 1rem;
+}
+
+thead th {
+    border-bottom: .135rem solid var(--separator-color);
+}
+
+tbody td {
+    border-bottom: .1rem solid var(--separator2);
+}
+
+tbody tr:last-child td {
+    border-bottom: .135rem solid var(--separator-color);
+}
+
+td, th {
+    padding: .5rem;
+}
+
+tr:nth-child(even), thead tr, tfoot tr {
+    background-color: var(--base-color-light);
 }
 
 /* stolen from modern-normalize.css */
