@@ -6,6 +6,7 @@
     --separator-color: #ccc;
     --text: #EEE;
     --text2: #AAA;
+    /* accent colors from ibm style guide (should be colorblind friendly)*/
     --accent1: #ffb000;
     --accent2: #fe6100;
 }
@@ -132,6 +133,18 @@ h1,
 h2,
 h3 {
     line-height: 1.1;
+}
+
+/* not stolen */
+blockquote {
+    margin: 1rem;
+    padding: 1rem;
+    background-color: var(--base-color);
+    border-left: 0.3rem solid var(--accent1);
+}
+
+blockquote p {
+    margin: 0;
 }
 
 /* stolen from modern-normalize.css */
