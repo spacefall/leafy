@@ -135,7 +135,7 @@ h3 {
     line-height: 1.1;
 }
 
-/* not stolen */
+/* nicer blockquotes */
 blockquote {
     margin: 1rem;
     padding: 1rem;
@@ -147,12 +147,20 @@ blockquote p {
     margin: 0;
 }
 
-/* stolen from modern-normalize.css */
-b,
-strong {
+/**
+ - makes dt bold
+ - uses relative bold for bold text, see modern-normalize.css
+*/
+b, strong, dt {
     font-weight: bolder;
 }
 
+/* shorter distance from side for dd */
+dd {
+    margin-left: 1.5rem;
+}
+
+/* stolen from modern-normalize.css */
 /**
 1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
 2. Correct the odd 'em' font sizing in all browsers.
