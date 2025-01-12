@@ -20,7 +20,7 @@
 }
 
 html {
-    /* modern-normalize.css */
+    /* Snippet from modern-normalize.css */
     font-family:
             system-ui,
             'Segoe UI',
@@ -42,23 +42,20 @@ body {
     line-height: 1.8rem;
     margin: 0;
     display: grid;
-    grid-template-columns: 1fr 80% 1fr;
+    grid-template-columns: 1fr 75% 1fr;
     background-color: var(--base-color);
 }
 
-body > * {
+body * {
     grid-column: 2;
     color: var(--text);
 }
 
+/* header, like the big one at the start of the page */
 body > header {
     background-color: var(--base-color-light);
-    color: var(--text);
-
-    /* allignment */
     grid-column: -1 / 1;
     padding: 3rem;
-
     text-align: center;
     border-bottom: var(--separator-color) 1px solid;
 }
@@ -69,7 +66,7 @@ body > header > h1 {
     /*color: rgba(0, 0, 0, 50%);*/
     color: transparent;
 
-    width: max-content;
+    width: fit-content;
     margin: auto;
     /*padding: max-content;*/
     padding: 0.5rem;
@@ -80,6 +77,7 @@ body > header > p {
     margin: 1rem auto;
 }
 
+/* headers and paragraphs */
 /* stolen from simple.css */
 p, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
@@ -305,6 +303,11 @@ select:not([multiple]) {
     background-position: 10px, 15px;
 }
 
+option:checked {
+    background-color: var(--accent1);
+    color: var(--on-accent);
+}
+
 /* checkbox */
 input[type="checkbox"] {
     background-color: var(--base-color-dark);
@@ -486,6 +489,11 @@ input[type="file"]:not(:disabled)::file-selector-button:hover {
 input[type="file"] {
     padding: .7rem .6rem;
     position: relative;
+    width: 18rem;
+}
+
+input[type="file"]:focus {
+    outline: none;
 }
 
 input[type="file"]::file-selector-button {
@@ -496,6 +504,11 @@ input[type="file"]::file-selector-button {
     margin: 0 .3rem;
 }
 
+input[type="file"]:focus::file-selector-button {
+    outline: .135rem solid var(--accent1);
+    outline-offset: .135rem;
+}
+
 *[dir="rtl"] input[type="file"]::file-selector-button {
     left: 0;
     right: unset;
@@ -504,6 +517,18 @@ input[type="file"]::file-selector-button {
 :focus {
     outline: .135rem solid var(--accent1);
     outline-offset: .135rem;
+}
+
+/* i guess why not theme even the meter? */
+/* this supports only chrome though (maybe safari), firefox doesn't have a way to style the meter */
+meter::-webkit-meter-bar {
+    background-color: var(--base-color-dark);
+    border-radius: .4rem;
+}
+
+meter::-webkit-meter-optimum-value {
+    background-color: var(--accent1);
+    border-radius: .4rem;
 }
 
 /* stolen from modern-normalize.css */
