@@ -10,6 +10,7 @@
     /* accent colors from ibm style guide (should be colorblind friendly)*/
     --accent1: #ffb000;
     --accent2: #fe6100;
+    --on-accent: #000;
 }
 
 *,
@@ -198,6 +199,40 @@ td, th {
 
 tr:nth-child(even), thead tr, tfoot tr {
     background-color: var(--base-color-light);
+}
+
+/* kbd */
+kbd {
+    background-color: var(--accent1);
+    border: .1rem solid var(--accent2);
+    border-bottom: .3rem solid var(--accent2);
+    border-radius: .4rem;
+    color: var(--on-accent);
+    padding: .1rem .3rem;
+    transition: border-bottom-width .3s ease-out, top .3s ease-out;
+    top: 0;
+    position: relative;
+}
+
+kbd:hover {
+    border-bottom-width: .1rem;
+    top: .3rem;
+}
+
+/* code */
+code, samp {
+    background-color: var(--base-color-light);
+    /*border: .1rem solid var(--separator2);*/
+    border-radius: .4rem;
+    padding: .3rem;
+}
+
+/* pre */
+pre {
+    background-color: var(--base-color-light);
+    border-radius: .4rem;
+    padding: 1rem;
+    overflow-x: auto;
 }
 
 /* stolen from modern-normalize.css */
