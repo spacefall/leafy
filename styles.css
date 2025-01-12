@@ -113,7 +113,8 @@ h6 {
 }
 
 p {
-    margin: 1.5rem 0;
+    margin-top: 0;
+    margin-bottom: 2rem;
 }
 
 /* Fix line height when title wraps */
@@ -248,7 +249,7 @@ q {
     font-style: italic;
 }
 
-mark, var, time{
+mark, var, time {
     border-radius: .4rem;
     padding: .2rem .5rem .3rem;
     background-color: var(--base-color-light);
@@ -259,6 +260,136 @@ mark {
     background-color: var(--accent1);
     color: var(--on-accent);
 }
+
+fieldset {
+    border: .1rem solid var(--separator-color);
+    border-radius: .4rem;
+    padding: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: .3rem;
+}
+
+textarea, input, select {
+    appearance: none;
+    /*height: 2rem;*/
+    /*border: .1rem solid var(--separator-color);*/
+    border: 0;
+    border-radius: .4rem;
+    padding: .4rem .6rem;
+    background: var(--base-color-dark);
+    color: var(--text);
+    font: inherit;
+}
+
+select[multiple] {
+    overflow-y: auto;
+}
+
+/**
+ these rules add small elements to the inputs, for example a dropdown arrow or the the tick to the checkbox
+ they have been shamelessly stolen from simple.css, links for snippets follow:
+ - https://github.com/kevquirk/simple.css/blob/be882ce561b0fe5ced621cc64595c812790b2524/simple.css#L457-L467
+*/
+select:not([multiple]) {
+    background-image: linear-gradient(45deg, transparent 49%, var(--text) 51%),
+    linear-gradient(135deg, var(--text) 51%, transparent 49%);
+    background-position: calc(100% - 15px), calc(100% - 10px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    padding-inline-end: 25px;
+}
+*[dir="rtl"] select:not([multiple]) {
+    background-position: 10px, 15px;
+}
+
+/* checkbox */
+input[type="checkbox"] {
+    background-color: var(--base-color-dark);
+    margin: 0;
+    padding: 0;
+    color: var(--accent1);
+    width: 1.25rem;
+    height: 1.25rem;
+    transform: translateY(0.16rem);
+    transition: background-color .2s ease;
+    cursor: pointer;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    top: 15%;
+    left: 30%;
+    width: .5rem;
+    height: .75rem;
+    border-right: solid var(--base-color-dark) 0.25rem;
+    border-bottom: solid var(--base-color-dark) 0.25rem;
+    /*box-shadow: inset 1em 1em #000;*/
+    transform: scale(0);
+}
+
+input[type="checkbox"]:checked, input[type="radio"]:checked  {
+    background-color: var(--accent1);
+}
+
+input[type="checkbox"]:checked::before {
+    transform: rotate(40deg) scale(1);
+}
+
+input[type="checkbox"]:hover:not(:disabled), input[type="radio"]:hover:not(:disabled) {
+    background-color: var(--accent2);
+}
+
+input[type="checkbox"]:disabled, input[type="radio"]:disabled {
+    cursor: not-allowed;
+}
+
+input[type="checkbox"]:checked:disabled, input[type="radio"]:checked:disabled {
+    background-color: var(--base-color-light);
+}
+
+/* radio */
+input[type="radio"] {
+    background-color: var(--base-color-dark);
+    margin: 0;
+    padding: 0;
+    color: var(--accent1);
+    width: 1.25rem;
+    height: 1.25rem;
+    transform: translateY(0.16rem);
+    border-radius: 100%;
+    transition: background-color .2s ease;
+    cursor: pointer;
+}
+
+input[type="radio"]::before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: .6em;
+    height: .6em;
+    background-color: var(--base-color-dark);
+    border-radius: 100%;
+    /*box-shadow: inset 1em 1em #000;*/
+    transform: scale(0);
+}
+
+input[type="radio"]:checked::before {
+    transform: scale(1) translate(-50%, -50%);
+}
+
+/*input[type="file"] {*/
+/*    border: 0;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*input::file-selector-button {*/
+/*    display: none;*/
+/*}*/
 
 /* stolen from modern-normalize.css */
 /**
