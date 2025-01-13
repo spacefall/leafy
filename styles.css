@@ -1,16 +1,50 @@
 /* colors */
 :root {
-    --base-color: #333;
-    --base-color-light: #555;
-    --base-color-dark: #222;
-    --separator-color: #ccc;
-    --separator2: #aaa;
-    --text: #EEE;
-    --text2: #AAA;
-    /* accent colors from ibm style guide (should be colorblind friendly)*/
-    --accent1: #ffb000;
-    --accent2: #fe6100;
-    --on-accent: #000;
+    --bg: #FDF6E3;
+    --bg-light: #F4F0D9;
+    --bg-dark: #EFEBD4;
+    --sep: #ccc;
+    --text: #5C6A72;
+    --text2: #939F91;
+    --accent1: #93B259;
+    --accent2: #8DA101;
+    --accent3: #7F9D3A;
+    --on-accent: #F0F1D2;
+    --accent-gradient: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent3));
+    --radius: .4rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #272E33;
+        --bg-light: #2E383C;
+        --bg-dark: #1E2326;
+        --sep: #374145;
+        --text: #D3C6AA;
+        --text2: #859289;
+        /* accent colors from ibm style guide (should be colorblind friendly)*/
+        --accent1: #A7C080;
+        --accent2: #93B259;
+        --accent3: #7F9D3A;
+        --on-accent: #425047;
+    }
+
+    /* should blind people less when in dark mode (see simple.css) */
+    img {
+        opacity: 80%;
+    }
+}
+
+/* mobile fixes */
+@media only screen and (max-width: 720px) {
+    textarea,
+    select,
+    input,
+    button,
+    video,
+    audio {
+        width: 100%;
+    }
 }
 
 *,
@@ -21,15 +55,14 @@
 
 html {
     /* Snippet from modern-normalize.css */
-    font-family:
-            system-ui,
-            'Segoe UI',
-            Roboto,
-            Helvetica,
-            Arial,
-            sans-serif,
-            'Apple Color Emoji',
-            'Segoe UI Emoji';
+    font-family: system-ui,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji';
     -webkit-text-size-adjust: 100%;
     tab-size: 4;
 
@@ -43,7 +76,7 @@ body {
     margin: 0;
     display: grid;
     grid-template-columns: 1fr 75% 1fr;
-    background-color: var(--base-color);
+    background-color: var(--bg);
 }
 
 body * {
@@ -51,17 +84,55 @@ body * {
     color: var(--text);
 }
 
+/* scrollbar */
+/**
+webkit
+while it feels more customizable, the firefox standard scrollbar with custom color is better
+which feels counter intuitive, but i guess that's why they don't implement more scrollbar features
+*/
+*::-webkit-scrollbar {
+    height: .4rem;
+    width: .4rem;
+}
+
+*::-webkit-scrollbar-track:hover {
+    background-color: var(--bg-dark);
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: var(--radius);
+    background-color: var(--accent1);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent2);
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background-color: var(--accent3);
+}
+
+/**
+firefox, the browser with the better scrollbar (imho)
+the rule is inside a @supports block so it doesn't apply to webkit browsers and makes their scrollbar even worse
+*/
+@supports not selector(::-webkit-scrollbar-thumb) {
+    * {
+        scrollbar-color: var(--accent1) transparent;
+    }
+}
+
 /* header, like the big one at the start of the page */
 body > header {
-    background-color: var(--base-color-light);
+    background-color: var(--bg-light);
     grid-column: -1 / 1;
     padding: 3rem;
     text-align: center;
-    border-bottom: var(--separator-color) 1px solid;
+    border-bottom: var(--sep) 1px solid;
 }
 
 body > header > h1 {
-    background: linear-gradient(to left, var(--accent1), var(--accent2));
+    background: var(--accent-gradient);
     background-clip: text;
     /*color: rgba(0, 0, 0, 50%);*/
     color: transparent;
@@ -70,7 +141,7 @@ body > header > h1 {
     margin: auto;
     /*padding: max-content;*/
     padding: 0.5rem;
-    filter: drop-shadow(var(--base-color-dark) 0 0 .3rem);
+    filter: drop-shadow(var(--bg-dark) 0 0 .3rem);
 }
 
 body > header > p {
@@ -126,7 +197,7 @@ h3 {
 blockquote {
     margin: 1rem;
     padding: 1rem;
-    background-color: var(--base-color-light);
+    background-color: var(--bg-light);
     border-left: 0.3rem solid var(--accent1);
 }
 
@@ -137,7 +208,7 @@ blockquote p {
 /* makes separators more consistent */
 hr {
     border: 0;
-    border-bottom: .135rem solid var(--separator-color);
+    border-bottom: .135rem solid var(--sep);
 }
 
 /**
@@ -159,6 +230,7 @@ table {
     border-spacing: 0;
     text-align: justify;
     border-collapse: collapse;
+    margin-bottom: 1rem;
 }
 
 table caption {
@@ -168,15 +240,15 @@ table caption {
 }
 
 thead th {
-    border-bottom: .135rem solid var(--separator-color);
+    border-bottom: .135rem solid var(--sep);
 }
 
 tbody td {
-    border-bottom: .1rem solid var(--separator2);
+    border-bottom: .1rem solid var(--sep);
 }
 
 tfoot th {
-    border-top: .135rem solid var(--separator-color);
+    border-top: .135rem solid var(--sep);
 }
 
 td, th {
@@ -184,7 +256,7 @@ td, th {
 }
 
 tr:nth-child(even), thead tr, tfoot tr {
-    background-color: var(--base-color-light);
+    background-color: var(--bg-light);
 }
 
 /* kbd, i think this is so cool, if you hover over it it moves down like a key :) */
@@ -193,7 +265,7 @@ kbd {
     background-color: var(--accent1);
     border: .1rem solid var(--accent2);
     border-bottom: .3rem solid var(--accent2);
-    border-radius: .4rem;
+    border-radius: var(--radius);
     color: var(--on-accent);
     padding: .1rem .3rem;
     transition: border-bottom-width .3s ease-out, top .3s ease-out;
@@ -210,26 +282,28 @@ kbd:hover {
 a[href] {
     color: var(--accent1);
     text-decoration: none;
-    transition: color .3s ease-out, text-decoration .3s ease-out;
 }
 
 a[href]:hover {
     color: var(--accent2);
     text-decoration: underline wavy var(--accent2);
-    /*border-bottom: .1rem solid var(--accent2);*/
+}
+
+a[href]:visited {
+    color: var(--accent3);
+    text-decoration: underline wavy var(--accent3);
 }
 
 /* inline formatting ig */
 code, samp {
-    background-color: var(--base-color-light);
-    /*border: .1rem solid var(--separator2);*/
-    border-radius: .4rem;
+    background-color: var(--bg-light);
+    border-radius: var(--radius);
     padding: .3rem;
 }
 
 pre {
-    background-color: var(--base-color-light);
-    border-radius: .4rem;
+    background-color: var(--bg-light);
+    border-radius: var(--radius);
     padding: 1rem;
     overflow-x: auto;
 }
@@ -248,20 +322,27 @@ q {
 }
 
 mark, var, time {
-    border-radius: .4rem;
+    border-radius: var(--radius);
     padding: .2rem .5rem .3rem;
-    background-color: var(--base-color-light);
+    background-color: var(--bg-light);
 }
 
 mark {
-    background-color: var(--accent1);
+    background: var(--accent-gradient);
     color: var(--on-accent);
+}
+
+img,
+video {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
 }
 
 /* form elements */
 fieldset {
-    border: .1rem solid var(--separator-color);
-    border-radius: .4rem;
+    border: .1rem solid var(--sep);
+    border-radius: var(--radius);
     padding: 1rem;
 }
 
@@ -273,9 +354,9 @@ label {
 textarea, input, select {
     appearance: none;
     border: 0;
-    border-radius: .4rem;
+    border-radius: var(--radius);
     padding: .4rem .6rem;
-    background: var(--base-color-dark);
+    background: var(--bg-dark);
     color: var(--text);
     font: inherit;
 }
@@ -305,6 +386,7 @@ select:not([multiple]) {
     background-repeat: no-repeat;
     padding-inline-end: 25px;
 }
+
 *[dir="rtl"] select:not([multiple]) {
     background-position: 10px, 15px;
 }
@@ -318,7 +400,7 @@ this was a pain
 - i should've probably left the default checkbox
 */
 input[type="checkbox"] {
-    background-color: var(--base-color-dark);
+    background-color: var(--bg-dark);
     margin: 0;
     padding: 0;
     color: var(--accent1);
@@ -336,8 +418,8 @@ input[type="checkbox"]:checked::before {
     left: 30%;
     width: .5rem;
     height: .75rem;
-    border-right: solid var(--base-color-dark) 0.25rem;
-    border-bottom: solid var(--base-color-dark) 0.25rem;
+    border-right: solid var(--bg-dark) 0.25rem;
+    border-bottom: solid var(--bg-dark) 0.25rem;
     transform: rotate(40deg);
 }
 
@@ -350,7 +432,7 @@ this was a pain like the checkbox
 - i should've probably left the default radio button
 */
 input[type="radio"] {
-    background-color: var(--base-color-dark);
+    background-color: var(--bg-dark);
     margin: 0;
     padding: 0;
     color: var(--accent1);
@@ -369,7 +451,7 @@ input[type="radio"]:checked::before {
     left: 50%;
     width: .6em;
     height: .6em;
-    background-color: var(--base-color-dark);
+    background-color: var(--bg-dark);
     border-radius: 100%;
     transform: translate(-50%, -50%);
 }
@@ -379,8 +461,9 @@ misc rules for checkboxes and radios
 - hover background color
 - disabled background color
 - checked background color
- */
-input[type="checkbox"]:checked, input[type="radio"]:checked  {
+- fix for the label
+*/
+input[type="checkbox"]:checked, input[type="radio"]:checked {
     background-color: var(--accent1);
 }
 
@@ -389,8 +472,13 @@ input[type="checkbox"]:hover:not(:disabled), input[type="radio"]:hover:not(:disa
 }
 
 input[type="checkbox"]:disabled, input[type="radio"]:disabled {
-    background-color: var(--base-color-light);
+    background-color: var(--bg-light);
     cursor: not-allowed;
+}
+
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+    display: inline-block;
 }
 
 /* makes color picker bigger */
@@ -407,7 +495,6 @@ input[type="range"] {
     appearance: none;
     background: transparent;
     cursor: pointer;
-    width: 12rem;
 }
 
 /* Removes default focus */
@@ -418,8 +505,8 @@ input[type="range"]:focus {
 /* webkit */
 /* slider track */
 input[type="range"]::-webkit-slider-runnable-track {
-    background-color: var(--base-color-dark);
-    border-radius: 0.5rem;
+    background-color: var(--bg-dark);
+    border-radius: var(--radius);
     height: 0.5rem;
 }
 
@@ -429,9 +516,17 @@ input[type="range"]::-webkit-slider-thumb {
     appearance: none;
     margin-top: -4px; /* Centers thumb on the track */
     background-color: var(--accent1);
-    border-radius: 0.5rem;
+    border-radius: 100%;
     height: 1rem;
     width: 1rem;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+    background-color: var(--accent2);
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+    background-color: var(--accent3);
 }
 
 input[type="range"]:focus::-webkit-slider-thumb {
@@ -442,8 +537,8 @@ input[type="range"]:focus::-webkit-slider-thumb {
 /* firefox */
 /* slider track */
 input[type="range"]::-moz-range-track {
-    background-color: var(--base-color-dark);
-    border-radius: 0.5rem;
+    background-color: var(--bg-dark);
+    border-radius: var(--radius);
     height: 0.5rem;
 }
 
@@ -451,12 +546,20 @@ input[type="range"]::-moz-range-track {
 input[type="range"]::-moz-range-thumb {
     background-color: var(--accent1);
     border: none; /*Removes extra border that FF applies*/
-    border-radius: 0.5rem;
+    border-radius: var(--radius);
     height: 1rem;
     width: 1rem;
 }
 
-input[type="range"]:focus::-moz-range-thumb{
+input[type="range"]:hover::-moz-range-thumb {
+    background-color: var(--accent2);
+}
+
+input[type="range"]:active::-moz-range-thumb {
+    background-color: var(--accent3);
+}
+
+input[type="range"]:focus::-moz-range-thumb {
     outline: .135rem solid var(--accent1);
     outline-offset: .135rem;
 }
@@ -475,13 +578,14 @@ input[type="button"],
 input[type="file"]::file-selector-button {
     appearance: none;
     font: inherit;
-    background-color: var(--accent1);
+    background: var(--accent1);
     color: var(--on-accent);
     border: 0;
-    border-radius: .4rem;
+    border-radius: var(--radius);
     padding: .4rem .6rem;
     cursor: pointer;
     transition: background-color .3s ease-out;
+    margin: .1rem;
 }
 
 button:disabled,
@@ -489,7 +593,7 @@ input[type="submit"]:disabled,
 input[type="reset"]:disabled,
 input[type="button"]:disabled,
 input[type="file"]:disabled::file-selector-button {
-    background-color: var(--base-color-light);
+    background-color: var(--bg-light);
     color: var(--text2);
     cursor: not-allowed;
 }
@@ -511,19 +615,37 @@ file input button customization:
 input[type="file"] {
     padding: .7rem .6rem;
     position: relative;
-    width: 18rem;
+    /*width: 20rem;*/
+    text-overflow: ellipsis;
 }
 
 input[type="file"]:focus {
     outline: none;
 }
 
+/**
+most efficient way to make sure the selected file text doesn't end up under the button
+1h30m later i realize that this isn't the most efficient way (it was ironic at first but now it's even less ironic)
+why? just because chrome decided to not stick to the standards and make this possible but firefox didn't
+thus this "most efficient way" is kinda working on some browsers and is also a hack
+because surely some languages are longer than this filler text
+
+i also have no idea how to make this work without the filler text and only with css
+if there's one thing i learned about css is that it gives you too much freedom with some elements
+and then just makes you unable to move elements with others
+*/
+input[type="file"]::after {
+    display: inline-block;
+    content: "this is filler:)";
+    visibility: hidden;
+}
+
 input[type="file"]::file-selector-button {
+    margin: 0 .4rem;
     position: absolute;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    margin: 0 .3rem;
 }
 
 input[type="file"]:focus::file-selector-button {
@@ -537,22 +659,22 @@ input[type="file"]:focus::file-selector-button {
     right: unset;
 }
 
-/* focus rules, so they are consistent and also are more in line with the theme */
-:focus {
-    outline: .135rem solid var(--accent1);
-    outline-offset: .135rem;
-}
-
 /* i guess why not theme even the meter? */
 /* this supports only chrome though (maybe safari), firefox doesn't have a way to style the meter */
 meter::-webkit-meter-bar {
-    background-color: var(--base-color-dark);
-    border-radius: .4rem;
+    background-color: var(--bg-dark);
+    border-radius: var(--radius);
 }
 
 meter::-webkit-meter-optimum-value {
     background-color: var(--accent1);
-    border-radius: .4rem;
+    border-radius: var(--radius);
+}
+
+/* focus rules, so they are consistent and also are more in line with the theme */
+:focus {
+    outline: .135rem solid var(--accent1);
+    outline-offset: .135rem;
 }
 
 /* snippet stolen from modern-normalize.css */
@@ -566,13 +688,12 @@ code,
 kbd,
 samp,
 pre {
-    font-family:
-            ui-monospace,
-            SFMono-Regular,
-            Consolas,
-            'Liberation Mono',
-            Menlo,
-            monospace; /* 1 */
+    font-family: ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    'Liberation Mono',
+    Menlo,
+    monospace; /* 1 */
     font-size: 1em; /* 2 */
 }
 
