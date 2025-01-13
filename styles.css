@@ -1,32 +1,31 @@
-/* colors */
+/* colors from everforest https://github.com/sainnhe/everforest */
 :root {
-    --bg: #FDF6E3;
-    --bg-light: #F4F0D9;
-    --bg-dark: #EFEBD4;
-    --sep: #ccc;
+    --bg: #F3EAD3;
+    --bg-light: #EAE4CA;
+    --bg-dark: #E5DFC5;
+    --sep: #E5DFC5;
     --text: #5C6A72;
     --text2: #939F91;
-    --accent1: #93B259;
-    --accent2: #8DA101;
-    --accent3: #7F9D3A;
-    --on-accent: #F0F1D2;
+    --accent1: #8DA101;
+    --accent2: #93B259;
+    --accent3: #A7C080;
+    --on-accent: #E5E6C5;
     --accent-gradient: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent3));
     --radius: .4rem;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg: #272E33;
-        --bg-light: #2E383C;
-        --bg-dark: #1E2326;
-        --sep: #374145;
+        --bg: #333C43;
+        --bg-light: #3A464C;
+        --bg-dark: #293136;
+        --sep: #434F55;
         --text: #D3C6AA;
         --text2: #859289;
-        /* accent colors from ibm style guide (should be colorblind friendly)*/
         --accent1: #A7C080;
         --accent2: #93B259;
-        --accent3: #7F9D3A;
-        --on-accent: #425047;
+        --accent3: #8DA101;
+        --on-accent: #48584E;
     }
 
     /* should blind people less when in dark mode (see simple.css) */
