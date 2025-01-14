@@ -389,7 +389,66 @@ video {
     background-color: var(--bg-dark);
 }
 
-/* form elements */
+/** progress **/
+progress {
+    appearance: none;
+    overflow: hidden;
+    border-radius: var(--rad);
+    height: .6rem;
+    border: var(--thin) solid var(--sep);
+    background-color: var(--bg-dark);
+    --_bg: right linear-gradient(
+            to right,
+            var(--bg-dark) 42%,
+            var(--accent1) 0%,
+            var(--accent1) 58%,
+            var(--bg-dark) 0%
+    );
+    --_bg-size: 250% 100%;
+    --_anim: indeterminate 2s infinite cubic-bezier(0.66, 0, 0.34, 1);
+}
+
+progress:indeterminate {
+    position: relative;
+}
+
+progress:indeterminate::after {
+    content: "";
+    inset: 0;
+    position: absolute;
+    background: var(--_bg);
+    background-size: var(--_bg-size);
+    animation: var(--_anim);
+}
+
+progress:indeterminate::-moz-progress-bar, progress:indeterminate::-webkit-progress-bar {
+    background: var(--_bg);
+    background-size: var(--_bg-size);
+    animation: var(--_anim);
+}
+
+@keyframes indeterminate {
+    50% {
+        background-position: left;
+    }
+}
+
+progress::-webkit-progress-bar {
+    background-color: var(--bg-dark);
+}
+
+progress::-webkit-progress-value {
+    background-color: var(--accent1);
+    transition: width 0.3s ease;
+}
+
+progress::-moz-progress-bar {
+    background-color: var(--accent1);
+    transition-property: width;
+    transition-duration: 0.3s;
+}
+
+/***** form elements *****/
 fieldset {
     border: .1rem solid var(--sep);
     border-radius: var(--rad);
