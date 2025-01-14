@@ -226,7 +226,18 @@ dt {
 }
 
 dd {
-    margin-left: 1.5rem;
+    margin-left: 2rem;
+}
+
+/* i feel this could be controversial */
+dd::before {
+    content: "↳ ";
+    color: var(--text2);
+    margin-inline-start: -1rem;
+}
+
+dd:dir(rtl)::before {
+    content: "↲ ";
 }
 
 /** separator **/
