@@ -359,10 +359,34 @@ mark {
 
 /***** embedded content *****/
 img,
-video {
+video,
+embed,
+object,
+iframe,
+canvas {
     max-width: 100%;
     height: auto;
-    border-radius: var(--radius);
+    border-radius: var(--rad);
+    border: var(--thin) solid var(--sep);
+}
+
+/*
+changes slightly the background color of the audio element on firefox
+chrome doesn't support this, well it does but it doesn't change the background, just colors behind the element
+chrome does support some pseudo elements but i couldn't quite understand them and also they don't work quite right
+for example changing the background makes the border aliased, the buttons/text don't change color with the color property
+
+if someone wants to try this, this is a basic tutorial i found: https://blog.shahednasser.com/how-to-style-an-audio-element/
+*/
+@supports not selector(::-webkit-media-controls-panel) {
+    audio {
+        background-color: var(--bg-dark);
+        border-radius: var(--rad);
+    }
+}
+
+video {
+    background-color: var(--bg-dark);
 }
 
 /* form elements */
