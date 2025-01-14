@@ -10,8 +10,12 @@
     --accent2: #93B259;
     --accent3: #A7C080;
     --on-accent: #E5E6C5;
-    --accent-gradient: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent3));
-    --radius: .4rem;
+
+    --accent-grad: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent3));
+    --rad: .4rem;
+    --thick: .135rem;
+    --thin: .1rem;
+    --anim: .3s;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -32,6 +36,15 @@
     img {
         opacity: 80%;
     }
+
+    /* makes the audio elem dark on chrome it's not perfect but at least it's not white */
+    @supports selector(::-webkit-media-controls-panel) {
+        audio {
+            opacity: 80%;
+            filter: invert();
+        }
+    }
+
 }
 
 /* mobile fixes */
@@ -46,28 +59,8 @@
     }
 }
 
-*,
-::before,
-::after {
-    box-sizing: border-box;
-}
-
 html {
-    /* Snippet from modern-normalize.css */
-    font-family: system-ui,
-    'Segoe UI',
-    Roboto,
-    Helvetica,
-    Arial,
-    sans-serif,
-    'Apple Color Emoji',
-    'Segoe UI Emoji';
-    -webkit-text-size-adjust: 100%;
-    tab-size: 4;
-
     line-height: 1.8rem;
-
-    /* nicer scrolling */
     scroll-behavior: smooth;
 }
 
@@ -75,7 +68,7 @@ body {
     font-size: 1.15rem;
     margin: 0;
     display: grid;
-    grid-template-columns: 1fr 75% 1fr;
+    grid-template-columns: 1fr 80% 1fr;
     background-color: var(--bg);
     color: var(--text);
 }
@@ -98,7 +91,7 @@ which feels counter intuitive, but i guess that's why they don't implement more 
 }
 
 *::-webkit-scrollbar-thumb {
-    border-radius: var(--radius);
+    border-radius: var(--rad);
     background-color: var(--accent1);
 }
 
@@ -120,29 +113,29 @@ the rule is inside a @supports block so it doesn't apply to webkit browsers and 
 */
 @supports not selector(::-webkit-scrollbar-thumb) {
     * {
-        scrollbar-color: var(--accent1) transparent;
+        scrollbar-color: var(--accent1) var(--bg-dark);
     }
 }
 
+/***** Text *****/
 /* header, like the big one at the start of the page */
 body > header {
     background-color: var(--bg-light);
     grid-column: -1 / 1;
-    padding: 3rem;
+    padding: 3.5rem 7rem;
     text-align: center;
     border-bottom: var(--sep) 1px solid;
 }
 
 body > header > h1 {
-    background: var(--accent-gradient);
+    background: var(--accent-grad);
     background-clip: text;
-    /*color: rgba(0, 0, 0, 50%);*/
     color: transparent;
 
     width: fit-content;
-    margin: auto;
-    /*padding: max-content;*/
     padding: 0.5rem;
+    margin: auto;
+
     filter: drop-shadow(var(--bg-dark) 0 0 .3rem);
 }
 
@@ -185,7 +178,7 @@ h6 {
 
 p {
     margin-top: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 /* Fix line height when title wraps */
@@ -195,12 +188,17 @@ h3 {
     line-height: 1.1;
 }
 
-/* nicer blockquotes */
+/** blockquotes **/
 blockquote {
     margin: 1rem;
     padding: 1rem;
     background-color: var(--bg-light);
     border-left: 0.3rem solid var(--accent1);
+}
+
+blockquote:dir(rtl) {
+    border-left: 0;
+    border-right: 0.3rem solid var(--accent1);
 }
 
 blockquote p {
@@ -213,20 +211,22 @@ hr {
     border-bottom: .135rem solid var(--sep);
 }
 
-/**
- - makes dt bold
- - uses relative bold for bold text, from modern-normalize.css
-*/
-b, strong, dt {
+/** description lists **/
+dt {
     font-weight: bolder;
 }
 
-/* shorter distance from side for dd */
 dd {
     margin-left: 1.5rem;
 }
 
-/* tables */
+/** separator **/
+hr {
+    border: 0;
+    border-bottom: var(--thick) solid var(--sep);
+}
+
+/** tables **/
 table {
     width: 100%;
     border-spacing: 0;
@@ -242,15 +242,15 @@ table caption {
 }
 
 thead th {
-    border-bottom: .135rem solid var(--sep);
+    border-bottom: var(--thick) solid var(--sep);
 }
 
 tbody td {
-    border-bottom: .1rem solid var(--sep);
+    border-bottom: var(--thin) solid var(--sep);
 }
 
 tfoot th {
-    border-top: .135rem solid var(--sep);
+    border-top: var(--thick) solid var(--sep);
 }
 
 td, th {
@@ -261,26 +261,39 @@ tr:nth-child(even), thead tr, tfoot tr {
     background-color: var(--bg-light);
 }
 
-/* kbd, i think this is so cool, if you hover over it it moves down like a key :) */
-/* i get impressed easily */
+/** code **/
+code, samp, pre {
+    background-color: var(--bg-light);
+    border-radius: var(--rad);
+    padding: .3rem;
+}
+
+pre {
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+/* i think this is so cool, if you hover over it it moves down like a key :) */
+/* yes, i get impressed easily */
 kbd {
     background-color: var(--accent1);
-    border: .1rem solid var(--accent2);
-    border-bottom: .3rem solid var(--accent2);
-    border-radius: var(--radius);
+    border: var(--thick) solid var(--accent2);
+    border-bottom: calc(var(--thick)*3) solid var(--accent2);
+    border-radius: var(--rad);
     color: var(--on-accent);
     padding: .1rem .3rem;
-    transition: border-bottom-width .3s ease-out, top .3s ease-out;
+    transition: border-bottom-width var(--anim) ease-out, top var(--anim) ease-out;
     top: 0;
     position: relative;
 }
 
 kbd:hover {
-    border-bottom-width: .1rem;
-    top: .3rem;
+    border-bottom-width: var(--thick);
+    top: calc(var(--thick)*3);
 }
 
-/* Links */
+/** inline formatting **/
+/* links */
 a[href] {
     color: var(--accent1);
     text-decoration: none;
@@ -296,23 +309,13 @@ a[href]:visited {
     text-decoration: underline wavy var(--accent3);
 }
 
-/* inline formatting ig */
-code, samp {
-    background-color: var(--bg-light);
-    border-radius: var(--radius);
-    padding: .3rem;
-}
-
-pre {
-    background-color: var(--bg-light);
-    border-radius: var(--radius);
-    padding: 1rem;
-    overflow-x: auto;
-}
-
 /* move underline lower */
 a[href], u, ins, abbr {
     text-underline-position: under;
+}
+
+small {
+    color: var(--text2);
 }
 
 abbr[title] {
@@ -324,16 +327,17 @@ q {
 }
 
 mark, var, time {
-    border-radius: var(--radius);
+    border-radius: var(--rad);
     padding: .2rem .5rem .3rem;
     background-color: var(--bg-light);
 }
 
 mark {
-    background: var(--accent-gradient);
+    background: var(--accent-grad);
     color: var(--on-accent);
 }
 
+/***** embedded content *****/
 img,
 video {
     max-width: 100%;
@@ -344,7 +348,7 @@ video {
 /* form elements */
 fieldset {
     border: .1rem solid var(--sep);
-    border-radius: var(--radius);
+    border-radius: var(--rad);
     padding: 1rem;
 }
 
@@ -356,7 +360,7 @@ label {
 textarea, input, select {
     appearance: none;
     border: 0;
-    border-radius: var(--radius);
+    border-radius: var(--rad);
     padding: .4rem .6rem;
     background: var(--bg-dark);
     color: var(--text);
@@ -377,7 +381,7 @@ option:checked {
 }
 
 /**
- this adds a small arrow to the single selection element thing, and it has been stolen from simple.css
+ this adds a small arrow to the single selection element thing, and it has been shamelessly stolen from simple.css
  https://github.com/kevquirk/simple.css/blob/be882ce561b0fe5ced621cc64595c812790b2524/simple.css#L457-L467
 */
 select:not([multiple]) {
@@ -508,7 +512,7 @@ input[type="range"]:focus {
 /* slider track */
 input[type="range"]::-webkit-slider-runnable-track {
     background-color: var(--bg-dark);
-    border-radius: var(--radius);
+    border-radius: var(--rad);
     height: 0.5rem;
 }
 
@@ -532,15 +536,15 @@ input[type="range"]:active::-webkit-slider-thumb {
 }
 
 input[type="range"]:focus::-webkit-slider-thumb {
-    outline: .135rem solid var(--accent1);
-    outline-offset: .135rem;
+    outline: var(--thick) var(--accent1);
+    outline-offset: var(--thick);
 }
 
 /* firefox */
 /* slider track */
 input[type="range"]::-moz-range-track {
     background-color: var(--bg-dark);
-    border-radius: var(--radius);
+    border-radius: var(--rad);
     height: 0.5rem;
 }
 
@@ -548,7 +552,7 @@ input[type="range"]::-moz-range-track {
 input[type="range"]::-moz-range-thumb {
     background-color: var(--accent1);
     border: none; /*Removes extra border that FF applies*/
-    border-radius: var(--radius);
+    border-radius: var(--rad);
     height: 1rem;
     width: 1rem;
 }
@@ -562,8 +566,8 @@ input[type="range"]:active::-moz-range-thumb {
 }
 
 input[type="range"]:focus::-moz-range-thumb {
-    outline: .135rem solid var(--accent1);
-    outline-offset: .135rem;
+    outline: var(--thick) solid var(--accent1);
+    outline-offset: var(--thick);
 }
 
 /**
@@ -583,7 +587,7 @@ input[type="file"]::file-selector-button {
     background: var(--accent1);
     color: var(--on-accent);
     border: 0;
-    border-radius: var(--radius);
+    border-radius: var(--rad);
     padding: .4rem .6rem;
     cursor: pointer;
     transition: background-color .3s ease-out;
@@ -651,8 +655,8 @@ input[type="file"]::file-selector-button {
 }
 
 input[type="file"]:focus::file-selector-button {
-    outline: .135rem solid var(--accent1);
-    outline-offset: .135rem;
+    outline: var(--thick) solid var(--accent1);
+    outline-offset: var(--thick);
 }
 
 /* rtl support for file picker */
@@ -665,21 +669,76 @@ input[type="file"]:focus::file-selector-button {
 /* this supports only chrome though (maybe safari), firefox doesn't have a way to style the meter */
 meter::-webkit-meter-bar {
     background-color: var(--bg-dark);
-    border-radius: var(--radius);
+    border-radius: var(--rad);
 }
 
 meter::-webkit-meter-optimum-value {
     background-color: var(--accent1);
-    border-radius: var(--radius);
+    border-radius: var(--rad);
 }
 
 /* focus rules, so they are consistent and also are more in line with the theme */
 :focus {
-    outline: .135rem solid var(--accent1);
-    outline-offset: .135rem;
+    outline: var(--thick) solid var(--accent1);
+    outline-offset: var(--thick);
 }
 
-/* snippet stolen from modern-normalize.css */
+/*
+The rules follwoing this comment are shamelessly stolen from https://github.com/sindresorhus/modern-normalize/blob/main/modern-normalize.css
+ */
+
+/*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
+
+/*
+Document
+========
+*/
+
+/**
+Use a better box model (opinionated).
+*/
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+/**
+1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
+2. Correct the line height in all browsers.
+3. Prevent adjustments of font size after orientation changes in iOS.
+4. Use a more readable tab size (opinionated).
+*/
+
+html {
+    font-family:
+            system-ui,
+            'Segoe UI',
+            Roboto,
+            Helvetica,
+            Arial,
+            sans-serif,
+            'Apple Color Emoji',
+            'Segoe UI Emoji'; /* 1 */
+    /*line-height: 1.15; !* 2 *!*/
+    -webkit-text-size-adjust: 100%; /* 3 */
+    tab-size: 4; /* 4 */
+}
+
+/*
+Text-level semantics
+====================
+*/
+
+/**
+Add the correct font weight in Chrome and Safari.
+*/
+
+b,
+strong {
+    font-weight: bolder;
+}
 
 /**
 1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
@@ -690,12 +749,13 @@ code,
 kbd,
 samp,
 pre {
-    font-family: ui-monospace,
-    SFMono-Regular,
-    Consolas,
-    'Liberation Mono',
-    Menlo,
-    monospace; /* 1 */
+    font-family:
+            ui-monospace,
+            SFMono-Regular,
+            Consolas,
+            'Liberation Mono',
+            Menlo,
+            monospace; /* 1 */
     font-size: 1em; /* 2 */
 }
 
@@ -705,7 +765,6 @@ Add the correct font size in all browsers.
 
 small {
     font-size: 80%;
-    color: var(--text2);
 }
 
 /**
@@ -728,3 +787,15 @@ sup {
     top: -0.5em;
 }
 
+/*
+Interactive
+===========
+*/
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+    display: list-item;
+}
