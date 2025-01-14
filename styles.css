@@ -394,6 +394,18 @@ video {
     background-color: var(--bg-dark);
 }
 
+/* i guess why not theme even the meter? */
+/* this supports only chrome though (maybe safari), firefox doesn't have a way to style the meter */
+meter::-webkit-meter-bar {
+    background-color: var(--bg-dark);
+    border-radius: var(--rad);
+    overflow: hidden;
+}
+
+meter::-webkit-meter-optimum-value {
+    background-color: var(--accent1);
+}
+
 /** progress **/
 progress {
     appearance: none;
@@ -785,18 +797,6 @@ input[type="file"]:focus::file-selector-button {
 *[dir="rtl"] input[type="file"]::file-selector-button {
     left: 0;
     right: unset;
-}
-
-/* i guess why not theme even the meter? */
-/* this supports only chrome though (maybe safari), firefox doesn't have a way to style the meter */
-meter::-webkit-meter-bar {
-    background-color: var(--bg-dark);
-    border-radius: var(--rad);
-}
-
-meter::-webkit-meter-optimum-value {
-    background-color: var(--accent1);
-    border-radius: var(--rad);
 }
 
 /* focus rules, so they are consistent and also are more in line with the theme */
