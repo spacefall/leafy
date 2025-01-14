@@ -218,6 +218,7 @@ aside {
     max-width: 30%;
     border-radius: var(--rad);
     text-align: right;
+    margin: 1.5rem;
 }
 
 aside:dir(rtl) {
