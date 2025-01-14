@@ -57,6 +57,11 @@
     audio {
         width: 100%;
     }
+
+    dialog {
+        max-width: 100%;
+        margin: auto 1em;
+    }
 }
 
 html {
@@ -446,6 +451,20 @@ progress::-moz-progress-bar {
     background-color: var(--accent1);
     transition-property: width;
     transition-duration: 0.3s;
+}
+
+dialog {
+    background-color: var(--bg);
+    color: var(--text);
+    border: var(--thin) solid var(--sep);
+    border-radius: var(--rad);
+    max-width: 40rem;
+    padding: 1rem;
+}
+
+dialog::backdrop {
+    background-color: var(--bg);
+    opacity: 0.8;
 }
 
 /***** form elements *****/
