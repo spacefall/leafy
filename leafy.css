@@ -430,6 +430,7 @@ pre {
 pre {
     padding: 1rem;
     overflow-x: auto;
+    height: min-content;
 }
 
 /* i think this is so cool, if you hover over it it moves down like a key :) */
