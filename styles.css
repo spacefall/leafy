@@ -508,6 +508,7 @@ progress::-moz-progress-bar {
     transition-duration: 0.3s;
 }
 
+/** dialog **/
 dialog {
     background-color: var(--bg);
     color: var(--text);
@@ -523,10 +524,18 @@ dialog::backdrop {
 }
 
 /***** form elements *****/
+/*
+a warning to those who dare to edit this section, this is a mess, sorry, don't look at it too much
+please
+*/
 fieldset {
-    border: .1rem solid var(--sep);
+    border: var(--thin) solid var(--sep);
     border-radius: var(--rad);
     padding: 1rem;
+}
+
+legend {
+    color: var(--text2);
 }
 
 label {
@@ -546,20 +555,7 @@ select {
     font: inherit;
 }
 
-/* select elem customization */
-
-/* hide scrollbar */
-select[multiple] {
-    overflow-y: auto;
-}
-
-/* changes background color for selected option */
-option:checked {
-    background-color: var(--accent1);
-    color: var(--on-accent);
-}
-
-/**
+/*
  this adds a small arrow to the single selection element thing, and it has been shamelessly stolen from simple.css
  https://github.com/kevquirk/simple.css/blob/be882ce561b0fe5ced621cc64595c812790b2524/simple.css#L457-L467
 */
@@ -572,8 +568,18 @@ select:not([multiple]) {
     padding-inline-end: 25px;
 }
 
-*[dir="rtl"] select:not([multiple]) {
+select:not([multiple]):dir(rtl) {
     background-position: 10px, 15px;
+}
+
+select[multiple] {
+    overflow-y: auto;
+}
+
+/* changes background color for selected option */
+option:checked {
+    background-color: var(--accent1);
+    color: var(--on-accent);
 }
 
 /**
@@ -658,6 +664,12 @@ input[type="radio"]:hover:not(:disabled) {
     background-color: var(--accent2);
 }
 
+input[type="checkbox"]:active:not(:disabled),
+input[type="radio"]:active:not(:disabled) {
+    background-color: var(--accent3) !important;
+}
+
+
 input[type="checkbox"]:disabled,
 input[type="radio"]:disabled {
     background-color: var(--bg-light);
@@ -674,18 +686,16 @@ input[type="color"] {
     height: 2.5rem;
 }
 
-/**
+/*
 range, most of the css here was from https://range-input-css.netlify.app/
 the style change the thumb color to the accent color, the track gets the dark color and is also thinner (and rounded)
 */
 input[type="range"] {
-    -webkit-appearance: none;
     appearance: none;
     background: transparent;
     cursor: pointer;
 }
 
-/* Removes default focus */
 input[type="range"]:focus {
     outline: none;
 }
@@ -797,6 +807,14 @@ input[type="file"]:not(:disabled)::file-selector-button:hover {
     background-color: var(--accent2);
 }
 
+button:active:not(:disabled),
+input[type="submit"]:active:not(:disabled),
+input[type="reset"]:active:not(:disabled),
+input[type="button"]:active:not(:disabled),
+input[type="file"]:not(:disabled)::file-selector-button:active {
+    background-color: var(--accent3) !important;
+}
+
 /**
 file input button customization:
 - moves the button to the right
@@ -844,8 +862,7 @@ input[type="file"]:focus::file-selector-button {
     outline-offset: var(--thick);
 }
 
-/* rtl support for file picker */
-*[dir="rtl"] input[type="file"]::file-selector-button {
+input[type="file"]::file-selector-button:dir(rtl) {
     left: 0;
     right: unset;
 }
@@ -860,7 +877,7 @@ body>footer:last-child {
     grid-column: -1 / 1;
 }
 
-/* The rules follwoing this comment are shamelessly stolen from https://github.com/sindresorhus/modern-normalize/blob/main/modern-normalize.css */
+/* The rules following this comment are shamelessly stolen from https://github.com/sindresorhus/modern-normalize/blob/main/modern-normalize.css */
 
 /*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
@@ -965,17 +982,4 @@ sub {
 
 sup {
     top: -0.5em;
-}
-
-/*
-Interactive
-===========
-*/
-
-/*
-Add the correct display in Chrome and Safari.
-*/
-
-summary {
-    display: list-item;
 }
