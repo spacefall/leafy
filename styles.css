@@ -62,6 +62,15 @@
         max-width: 100%;
         margin: auto 1em;
     }
+
+    aside {
+        width: 100% !important;
+        float: none !important;
+        margin-inline-start: 0 !important;
+        text-align: unset !important;
+        margin: 0 !important;
+        margin-bottom: 1rem !important;
+    }
 }
 
 html {
@@ -199,11 +208,13 @@ blockquote {
     padding: 1rem;
     background-color: var(--bg-light);
     border-left: 0.3rem solid var(--accent1);
+    border-radius: 0 var(--rad) var(--rad) 0;
 }
 
 blockquote:dir(rtl) {
     border-left: 0;
     border-right: 0.3rem solid var(--accent1);
+    border-radius: var(--rad) 0 0 var(--rad);
 }
 
 blockquote p {
@@ -215,10 +226,11 @@ aside {
     background-color: var(--bg-light);
     padding: 1rem;
     float: right;
-    max-width: 30%;
+    width: 25rem;
     border-radius: var(--rad);
     text-align: right;
-    margin: 1.5rem;
+    margin: 0.5rem 1.5rem;
+    border: var(--thin) solid var(--sep);
 }
 
 aside:dir(rtl) {
