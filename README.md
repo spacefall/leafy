@@ -1,9 +1,9 @@
 # leafy
 ## What's this?
 Hi! This is leafy, an overcomplicated classless CSS framework/theme for (almost) everything, from blogs to simple web apps.
-You can find a demo of most HTML5 elements [here](demo.html).
+You can find a demo of most HTML5 elements [here](https://spacefall.github.io/leafy/demo.html).
 ### But why?
-Simple: I'm tired of messing about with CSS and some pre-existing (classless) themes like [Sakura](https://github.com/oxalorg/sakura) feel restrictive as (imo) they're optimized for blogs. Other (still classless) frameworks like [Simple.css](https://simplecss.org) are better but I still feel something could be done slightly better/different.
+Simple: I'm tired of messing about with CSS and some pre-existing (classless) themes like [Sakura](https://github.com/oxalorg/sakura) feel restrictive as (imo) they're optimized for blogs. Other (still classless) frameworks like [Simple.css](https://simplecss.org) are better, but I still feel something could be done slightly better/different.
 
 So that's why I spent the last few days messing about with CSS and ended up making a similar theme to Simple.css.
 
