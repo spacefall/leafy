@@ -10,7 +10,7 @@ So that's why I spent the last few days messing about with CSS and ended up maki
 ## Usage
 Like other classless themes, leafy takes 0.1s to install, simply add the following line to you html document's head:
 ```html
-<link rel="stylesheet" href="leafy.min.css">
+<link rel="stylesheet" href="https://spacefall.github.io/leafy/leafy.min.css">
 ```
 > You should always use the .min.css version unless you're modifying the theme
 
