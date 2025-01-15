@@ -145,14 +145,14 @@ body>footer {
 
 body>header {
     background-color: var(--bg-light);
-    padding: 3.5rem 7rem;
+    padding: 3.5rem;
     border-bottom: var(--sep) var(--thin) solid;
 }
 
 body>footer {
     background-color: var(--bg-dark);
     margin-top: 5rem;
-    padding: 2.5rem 5rem;
+    padding: 2.5rem 3.5rem;
     border-bottom: var(--sep) var(--thin) solid;
 }
 
@@ -172,6 +172,62 @@ body>header>p {
     margin: 1rem auto;
 }
 
+/** navigation **/
+body > header > nav li {
+    display: inline-block;
+    margin: .5rem 0;
+}
+
+body > header > nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+body > header > nav a {
+    color: var(--text) !important;
+    border-radius: var(--rad);
+    padding: .35rem .7rem;
+    /*margin: 1rem .2rem;*/
+    border: var(--thick) solid var(--sep);
+    transition: border var(--anim) ease-out, color var(--anim) ease-out;
+}
+
+/* dropdown */
+body > header > nav a:not(:has(*)):not(:only-child):after {
+    content: " ⏷";
+}
+
+body > header > nav a[href]:hover {
+    color: var(--accent1) !important;
+    text-decoration: none !important;
+    border: var(--thick) dashed var(--accent1);
+}
+
+body > header > nav ul ul {
+    display: none;
+    position: absolute;
+    background-color: var(--bg);
+    border: var(--thin) solid var(--sep);
+    border-radius: var(--rad);
+    padding: 0;
+    margin: .3rem;
+}
+
+body > header > nav li li {
+    display: block;
+    margin: 1rem;
+}
+
+body > header > nav li:hover ul {
+    display: block;
+    z-index: 1;
+}
+
+/* support for logos */
+body > header > nav a:has(>img), body > header > nav a > img {
+    border: none !important;
+}
+
 /* headers and paragraphs */
 /* stolen from simple.css */
 p,
@@ -182,6 +238,8 @@ h4,
 h5,
 h6 {
     overflow-wrap: break-word;
+    word-wrap: break-word;
+
 }
 
 /* Format headers */
