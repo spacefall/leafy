@@ -431,7 +431,7 @@ kbd {
     border-radius: var(--rad);
     color: var(--on-accent);
     padding: .1rem .3rem;
-    transition: border-bottom-width var(--anim) ease-out, top var(--anim) ease-out;
+    transition: background-color var(--anim) ease-out, top var(--anim) ease-out, border var(--anim) ease-out;
     top: 0;
     position: relative;
 }
@@ -439,6 +439,8 @@ kbd {
 kbd:hover {
     border-bottom-width: var(--thick);
     top: calc(var(--thick)*3);
+    background-color: var(--accent2);
+    border-color: var(--accent3);
 }
 
 /** inline formatting **/
