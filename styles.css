@@ -133,12 +133,20 @@ the rule is inside a @supports block so it doesn't apply to webkit browsers and 
 
 /***** Text *****/
 /* header, like the big one at the start of the page */
-body > header {
+body > header, body > footer:last-child {
     background-color: var(--bg-light);
     grid-column: -1 / 1;
-    padding: 3.5rem 7rem;
     text-align: center;
+}
+
+body > header {
+    padding: 3.5rem 7rem;
     border-bottom: var(--sep) 1px solid;
+}
+
+body > footer:last-child {
+    padding: 2.5rem 5rem;
+    border-top: var(--sep) 1px solid;
 }
 
 body > header > h1 {
@@ -818,9 +826,11 @@ input[type="file"]:focus::file-selector-button {
     outline-offset: var(--thick);
 }
 
-/*
-The rules follwoing this comment are shamelessly stolen from https://github.com/sindresorhus/modern-normalize/blob/main/modern-normalize.css
- */
+body > footer:last-child {
+    grid-column: -1 / 1;
+}
+
+/* The rules follwoing this comment are shamelessly stolen from https://github.com/sindresorhus/modern-normalize/blob/main/modern-normalize.css */
 
 /*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
