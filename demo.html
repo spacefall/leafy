@@ -4,21 +4,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple.css Test Page</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>HTML5 Test Page</title>
+  <link rel="stylesheet" href="leafy.min.css">
 </head>
 
 <body id="top">
 <header>
-  <h1>Simple.css Test Page</h1>
-  <p>This is a test page filled with common HTML elements.</p>
+  <h1>HTML5 Test Page</h1>
+  <p>This is a test page filled with common HTML elements, based on Simple.css's page.</p>
   <nav>
     <ul>
-      <li><a class="current" href="#text">Text</a></li>
-      <li><a href="#embedded">Embedded content</a></li>
-      <li><a href="#forms">Form elements</a></li>
-      <li><a href="https://simplecss.org/">Project homepage</a></li>
-      <li><a href="https://github.com/kevquirk/simple.css">GitHub repo</a></li>
+      <li>
+        <a>Jump to</a>
+        <ul>
+          <li><a class="current" href="#text">Text</a></li>
+          <li><a href="#embedded">Embedded content</a></li>
+          <li><a href="#forms">Form elements</a></li>
+        </ul>
+      </li>
+      <li><a href="https://github.com/spacefall/leafy">GitHub repo</a></li>
     </ul>
   </nav>
 </header>
@@ -1062,9 +1066,9 @@
           <label for="idl">Datalist</label>
           <input type="text" id="idl" list="example-list">
           <datalist id="example-list">
-            <option value="Example #1" />
-            <option value="Example #2" />
-            <option value="Example #3" />
+            <option value="Example #1"></option>
+            <option value="Example #2"></option>
+            <option value="Example #3"></option>
           </datalist>
         </p>
       </fieldset>
@@ -1083,17 +1087,18 @@
           <button type="reset">&lt;button type=reset&gt;</button>
           <button type="button" disabled>&lt;button disabled&gt;</button>
         </p>
-        <p>
-          <a href="#forms__action" class="button">&lt;a class=button&gt;</a>
-          <a href="#forms__action" class="button" aria-disabled="true">&lt;a class=button aria-disabled=true&gt;</a>
-        </p>
+<!--        <a> buttons aren't supported by leafy atm-->
+<!--        <p>-->
+<!--          <a href="#forms__action" class="button">&lt;a class=button&gt;</a>-->
+<!--          <a href="#forms__action" class="button" aria-disabled="true">&lt;a class=button aria-disabled=true&gt;</a>-->
+<!--        </p>-->
       </fieldset>
       <p><a href="#top">[Top]</a></p>
     </form>
   </section>
 </main>
 <footer>
-  <p>Based on <a href="http://github.com/cbracco/html5-test-page">HTML5-test-page</a> by cbracco.</p>
+  <p>Based on <a href="https://test.simplecss.org">kevquirk</a>'s edit of <a href="http://github.com/cbracco/html5-test-page">HTML5-test-page</a> by cbracco.</p>
 </footer>
 </body>
 
