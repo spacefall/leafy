@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: defaults
+*/
+
 /* colors from everforest https://github.com/sainnhe/everforest */
 :root {
     --bg: #F3EAD3;
@@ -67,7 +74,6 @@
     aside {
         width: 100% !important;
         float: none !important;
-        margin-inline-start: 0 !important;
         text-align: unset !important;
         margin: 0 !important;
         margin-bottom: 1rem !important;
@@ -88,6 +94,8 @@ html {
             'Apple Color Emoji',
             'Segoe UI Emoji';
     -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
     tab-size: 4;
 }
 
@@ -170,8 +178,13 @@ body>footer {
 
 body>header>h1 {
     background: var(--accent-grad);
+    -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+
+    width: -webkit-fit-content;
+
+    width: -moz-fit-content;
 
     width: fit-content;
     padding: 0.5rem;
@@ -342,6 +355,7 @@ dd {
 dd::before {
     content: "↳ ";
     color: var(--text2);
+    -webkit-margin-start: -1rem;
     margin-inline-start: -1rem;
 }
 
@@ -452,11 +466,13 @@ a[href] {
 
 a[href]:hover {
     color: var(--accent2);
+    -webkit-text-decoration: underline wavy var(--accent2);
     text-decoration: underline wavy var(--accent2);
 }
 
 a[href]:visited {
     color: var(--accent3);
+    -webkit-text-decoration: underline wavy var(--accent3);
     text-decoration: underline wavy var(--accent3);
 }
 
@@ -563,6 +579,8 @@ meter::-webkit-meter-optimum-value {
 
 /** progress **/
 progress {
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     overflow: hidden;
     border-radius: var(--rad);
@@ -588,6 +606,7 @@ progress:indeterminate::after {
     position: absolute;
     background: var(--_bg);
     background-size: var(--_bg-size);
+    -webkit-animation: var(--_anim);
     animation: var(--_anim);
 }
 
@@ -596,6 +615,12 @@ progress:indeterminate::-webkit-progress-bar {
     background: var(--_bg);
     background-size: var(--_bg-size);
     animation: var(--_anim);
+}
+
+@-webkit-keyframes indeterminate {
+    50% {
+        background-position: left;
+    }
 }
 
 @keyframes indeterminate {
@@ -610,11 +635,13 @@ progress::-webkit-progress-bar {
 
 progress::-webkit-progress-value {
     background-color: var(--accent1);
+    -webkit-transition: width 0.3s ease;
     transition: width 0.3s ease;
 }
 
 progress::-moz-progress-bar {
     background-color: var(--accent1);
+    -moz-transition-property: width;
     transition-property: width;
     transition-duration: 0.3s;
 }
@@ -627,6 +654,11 @@ dialog {
     border-radius: var(--rad);
     max-width: 40rem;
     padding: 1rem;
+}
+
+dialog::-webkit-backdrop {
+    background-color: var(--bg);
+    opacity: 0.8;
 }
 
 dialog::backdrop {
@@ -657,6 +689,8 @@ label {
 textarea,
 input,
 select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     border: 0;
     border-radius: var(--rad);
@@ -676,6 +710,7 @@ select:not([multiple]) {
     background-position: calc(100% - 15px), calc(100% - 10px);
     background-size: 5px 5px, 5px 5px;
     background-repeat: no-repeat;
+    -webkit-padding-end: 25px;
     padding-inline-end: 25px;
 }
 
@@ -802,6 +837,8 @@ range, most of the css here was from https://range-input-css.netlify.app/
 the style change the thumb color to the accent color, the track gets the dark color and is also thinner (and rounded)
 */
 input[type="range"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     background: transparent;
     cursor: pointer;
@@ -883,11 +920,27 @@ button styling
 - change pointer
 - rules for disabled buttons
 */
+input[type="file"]::-webkit-file-upload-button {
+    -webkit-appearance: none;
+    appearance: none;
+    font: inherit;
+    background: var(--accent1);
+    color: var(--on-accent);
+    border: 0;
+    border-radius: var(--rad);
+    padding: .4rem .6rem;
+    cursor: pointer;
+    -webkit-transition: background-color .3s ease-out;
+    transition: background-color .3s ease-out;
+    margin: .1rem;
+}
 button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
 input[type="file"]::file-selector-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     font: inherit;
     background: var(--accent1);
@@ -900,6 +953,12 @@ input[type="file"]::file-selector-button {
     margin: .1rem;
 }
 
+input[type="file"]:disabled::-webkit-file-upload-button {
+    background-color: var(--bg-light);
+    color: var(--text2);
+    cursor: not-allowed;
+}
+
 button:disabled,
 input[type="submit"]:disabled,
 input[type="reset"]:disabled,
@@ -910,12 +969,20 @@ input[type="file"]:disabled::file-selector-button {
     cursor: not-allowed;
 }
 
+input[type="file"]:not(:disabled)::-webkit-file-upload-button:hover {
+    background-color: var(--accent2);
+}
+
 button:hover:not(:disabled),
 input[type="submit"]:hover:not(:disabled),
 input[type="reset"]:hover:not(:disabled),
 input[type="button"]:hover:not(:disabled),
 input[type="file"]:not(:disabled)::file-selector-button:hover {
     background-color: var(--accent2);
+}
+
+input[type="file"]:not(:disabled)::-webkit-file-upload-button:active {
+    background-color: var(--accent3) !important;
 }
 
 button:active:not(:disabled),
@@ -960,6 +1027,14 @@ input[type="file"]::after {
     visibility: hidden;
 }
 
+input[type="file"]::-webkit-file-upload-button {
+    margin: 0 .4rem;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 input[type="file"]::file-selector-button {
     margin: 0 .4rem;
     position: absolute;
@@ -968,9 +1043,19 @@ input[type="file"]::file-selector-button {
     transform: translateY(-50%);
 }
 
+input[type="file"]:focus::-webkit-file-upload-button {
+    outline: var(--thick) solid var(--accent1);
+    outline-offset: var(--thick);
+}
+
 input[type="file"]:focus::file-selector-button {
     outline: var(--thick) solid var(--accent1);
     outline-offset: var(--thick);
+}
+
+input[type="file"]::-webkit-file-upload-button:dir(rtl) {
+    left: 0;
+    right: unset;
 }
 
 input[type="file"]::file-selector-button:dir(rtl) {
