@@ -218,7 +218,7 @@ body > header > nav a {
 }
 
 /* dropdown */
-body > header > nav a:not(:has(*)):not(:only-child):after {
+body > header > nav a:not(:only-child):after {
     content: " ⏷";
 }
 
@@ -246,11 +246,6 @@ body > header > nav li li {
 body > header > nav li:hover ul {
     display: block;
     z-index: 1;
-}
-
-/* support for logos */
-body > header > nav a:has(>img), body > header > nav a > img {
-    border: none !important;
 }
 
 /* headers and paragraphs */
